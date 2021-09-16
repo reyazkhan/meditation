@@ -1,0 +1,79 @@
+<div>
+  <button (click)="type = 'Tablet'" [ngClass]="{'active': type == 'Tablet'}">Tablet</button>
+  <button (click)="type = 'Capsule'" [ngClass]="{'active': type == 'Capsule'}">Capsule</button>
+  <button (click)="type = 'Syrup'" [ngClass]="{'active': type == 'Syrup'}">Syrup</button>
+</div>
+
+<div class="formComp">
+  <form name="medicForm" #medicForm="ngForm" (ngSubmit)="medicForm.valid ? addMedic() : '' ">
+    <p>
+      <label>Name</label>
+      <input type="text" name="name" [(ngModel)]="medic_form.name" required>
+      <span *ngIf="medicForm.invalid && medicForm.submitted" style="color: red">Name is Required</span>
+    </p>
+    <p>
+      <label>Times</label>
+      <input type="text" name="times" [(ngModel)]="medic_form.times" required>
+      <span *ngIf="medicForm.invalid && medicForm.submitted" style="color: red">Time is Required</span>
+    </p>
+    <p>
+      <label>Qty</label>
+      <input type="text" name="qty" [(ngModel)]="medic_form.qty" required>
+      <span *ngIf="medicForm.invalid && medicForm.submitted" style="color: red">Qty is Required</span>
+    </p>
+    <input type="submit" value="Add">
+  </form>
+
+  <div *ngIf="addData.length > 0">
+    <h3>---------------------------</h3>
+    <table>
+      <table>
+        <tr>
+          <td>S.No</td>
+          <td>Name</td>
+          <td>Times</td>
+          <td>Qty</td>
+          <td>Action</td>
+        </tr>
+        <tr *ngFor="let d of addData;let i =index">
+          <td>{{i+1}}</td>
+          <td>{{d.name}}</td>
+          <td>{{d.times}}</td>
+          <td>{{d.qty}}</td>
+          <td>
+            <button (click)="removeData(i)">Remove (-)</button>
+          </td>
+        </tr>
+      </table>
+    </table>
+  <button (click)="saveMedicData()">Save</button>
+
+  </div>
+
+  <div *ngIf="db.saveResultArray.length > 0">
+    <h3>---------------------------</h3>
+    <table>
+      <table>
+        <tr>
+          <td>S.No</td>
+          <td>Type of Medicine</td>
+          <td>Name</td>
+          <td>Times</td>
+          <td>Qty</td>
+        </tr>
+        <!-- <tr *ngFor="let d of db.saveResultArray[0].data;let i =index"> -->
+          <tr *ngFor="let d of db.saveResultArray;let i =index">
+
+          <td>{{i+1}}</td>
+          <td>{{d.type}}</td>
+          <td>{{d.name}}</td>
+          <td>{{d.times}}</td>
+          <td>{{d.qty}}</td>
+        </tr>
+      </table>
+    </table>
+
+  </div>
+
+
+</div>

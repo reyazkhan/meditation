@@ -1,0 +1,12 @@
+a{
+  text-decoration: none;
+
+}
+li{
+  list-style: none;
+  padding: 20px;
+}
+.tab-div{
+  background:rgb(148, 140, 140);
+  width: 130px;
+}
